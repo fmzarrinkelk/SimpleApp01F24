@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
             this.glassesOn = !this.glassesOn
             this.updateManImage()
         }
-        manImage = findViewById(R.id.man_with_hat_id)
-        manImage.setImageDrawable(getDrawable(R.drawable.man_with_hat))
+        manImage = findViewById(R.id.man_image)
+        manImage.setImageDrawable(getDrawable(R.drawable.man_without_glasses))
 
         errorButton = findViewById(R.id.error_button)
         errorButton.setOnClickListener {
@@ -58,13 +58,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateCounterView() {
+        counterView.text = counter.toString()
+    }
+
+    private fun updateManImage() {
+        val newImageId: Int = if (glassesOn) {
+            R.drawable.man_with_glasses
+        } else {
+            R.drawable.man_without_glasses
+        }
+        this.manImage.setImageResource(newImageId)
+    }
+
+
     private fun x() {
         var x1 = 1
         y()
-        // val errorButton2: Button = findViewById(R.id.main)
-//        errorButton2.setOnClickListener {
-//            println("")
-//        }
         z(30)
         a()
     }
@@ -74,11 +84,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun a() {
+//        val errorButton2: Button = findViewById(R.id.main)
         var a1 = 5
         var a2 = 10
         for (n in 0..a1) {
             val nn = n * 10
-            println("${n}")
+            println("$nn")
             for (m in 0..a2) {
                 println("the value of m is ${m}")
             }
@@ -86,25 +97,26 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val p: Int = 3
                     throw Exception()
-                }
-                catch (e1: Exception) {
+                } catch (e1: Exception) {
                     println("exception")
                 }
                 try {
+//                    h()
+                    lateinit var b: Button
+//                    b.setOnClickListener {}
                     throw CharacterCodingException()
-                }
-                catch (e2: Exception)
-                {
+                } catch (e2: CharacterCodingException) {
                     println("$e2")
                 }
                 throw myException()
-            } catch (e: Exception) {
-                println("an exception happened $e")
-            }
-            catch (e: myException) {
-                println()
+            } catch (e: myException) {
+                println("Exception $e happened")
             }
         }
+    }
+
+    private fun h() {
+        throw Exception()
     }
 
     private fun z(p: Int): String {
@@ -119,17 +131,5 @@ class MainActivity : AppCompatActivity() {
         println(f)
     }
 
-    private fun updateManImage() {
-        val newImageId: Int = if (glassesOn) {
-            R.drawable.man_with_glasses
-        } else {
-            R.drawable.man_with_hat
-        }
-        this.manImage.setImageResource(newImageId)
-    }
-
-    private fun updateCounterView() {
-        counterView.text = counter.toString()
-    }
 
 }
